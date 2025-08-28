@@ -1,0 +1,47 @@
+repos:
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+    - id: trailing-whitespace
+    - id: check-yaml
+    - id: check-toml
+    - id: check-json
+    - id: debug-statements
+    - id: detect-private-key
+    - id: name-tests-test
+    - id: end-of-file-fixer
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.20.0
+  hooks:
+    - id: pyupgrade
+      args: [--py313-plus]
+      name: Upgrade code to Python 3.13+
+
+- repo: https://github.com/asottile/yesqa
+  rev: v1.5.0
+  hooks:
+    - id: yesqa
+
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.7.9
+  hooks:
+    - id: uv-lock
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.11.11
+  hooks:
+    - id: ruff-check
+      args: [ --fix ]
+    - id: ruff-format
+
+- repo: https://github.com/hukkin/mdformat
+  rev: 0.7.22
+  hooks:
+    - id: mdformat
+      additional_dependencies:
+      - mdformat-gfm
+      - mdformat_frontmatter
+      - mdformat-config
+      - mdformat-ruff
