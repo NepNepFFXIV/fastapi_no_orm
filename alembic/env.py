@@ -1,11 +1,12 @@
 import asyncio
 from logging.config import fileConfig
 
-from sqlalchemy import pool
+from sqlalchemy import pool, text
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
+from src.fastapi_no_orm.settings import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -26,6 +27,8 @@ target_metadata = None
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+config.set_main_option("sqlalchemy.url", settings.postgres.alembic_postgres_url)
 
 
 def run_migrations_offline() -> None:
@@ -53,6 +56,12 @@ def run_migrations_offline() -> None:
 
 
 def do_run_migrations(connection: Connection) -> None:
+    schema_name = settings.postgres.schema
+
+    connection.execute(text(f"create schema if not exists {schema_name}"))
+    connection.execute(text(f"set search_path to {schema_name}"))
+    connection.commit()
+
     context.configure(connection=connection, target_metadata=target_metadata)
 
     with context.begin_transaction():
