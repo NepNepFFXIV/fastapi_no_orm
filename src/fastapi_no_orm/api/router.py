@@ -4,5 +4,10 @@ router = APIRouter()
 
 
 @router.get("/")
-def read_root():
+def select_operation():
+    return {"message": "Hello, World!"}
+
+
+@router.post("/")
+def insert_operation():
     return {"message": "Hello, World!"}
