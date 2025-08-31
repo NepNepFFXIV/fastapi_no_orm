@@ -1,3 +1,5 @@
+from random import randint
+
 from src.fastapi_no_orm.api.repository import Repository
 from src.fastapi_no_orm.database import postgres
 
@@ -5,6 +7,13 @@ from src.fastapi_no_orm.database import postgres
 class Service:
     def __init__(self, repository: Repository):
         self.repository = repository
+
+    async def select_operation(self):
+        product_id = randint(1, 10000)
+        await self.repository.select_operation(product_id)
+
+    async def insert_operation(self):
+        await self.repository.insert_operation()
 
 
 repository = Repository(postgres)
