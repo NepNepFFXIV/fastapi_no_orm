@@ -16,5 +16,9 @@ class Repository:
         async with self.postgres.get_connection() as connection:
             return await connection.fetchrow(query, product_id)
 
-    async def insert_operation(self) -> None:
-        return
+    async def insert_operation(self, description: str) -> None:
+        query = """
+            insert into no_orm.operation (description) values ($1)
+        """
+        async with self.postgres.get_connection() as connection:
+            await connection.execute(query, description)
