@@ -1,5 +1,6 @@
 from random import randint
 
+from src.fastapi_no_orm.api.models import Operation
 from src.fastapi_no_orm.api.repository import Repository
 from src.fastapi_no_orm.database import postgres
 
@@ -8,7 +9,7 @@ class Service:
     def __init__(self, repository: Repository):
         self.repository = repository
 
-    async def select_operation(self):
+    async def select_operation(self) -> Operation | None:
         product_id = randint(1, 1000)
         return await self.repository.select_operation(product_id)
 
