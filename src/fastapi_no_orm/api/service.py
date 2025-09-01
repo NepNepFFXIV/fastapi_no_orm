@@ -13,7 +13,7 @@ class Service:
         product_id = randint(1, 1000)
         return await self.repository.select_operation(product_id)
 
-    async def insert_operation(self, description: str):
+    async def insert_operation(self, description: str) -> None:
         await self.repository.insert_operation(description)
 
 

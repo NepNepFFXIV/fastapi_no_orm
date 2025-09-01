@@ -14,7 +14,7 @@ class PostgresConfig(BaseModel):
     user: str
     password: str
     db_name: str
-    schema: str
+    db_schema: str
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -58,4 +58,4 @@ class Settings(BaseSettings):
         return (TomlConfigSettingsSource(settings_cls),)
 
 
-settings = Settings()
+settings = Settings()  # type: ignore[call-arg]
