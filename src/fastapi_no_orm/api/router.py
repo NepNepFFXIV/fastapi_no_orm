@@ -7,8 +7,7 @@ router = APIRouter()
 
 @router.get("/")
 async def select_operation():
-    await service.select_operation()
-    return {"message": "Hello, World!"}
+    return await service.select_operation()
 
 
 @router.post("/")

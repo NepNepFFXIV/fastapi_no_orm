@@ -9,8 +9,8 @@ class Service:
         self.repository = repository
 
     async def select_operation(self):
-        product_id = randint(1, 10000)
-        await self.repository.select_operation(product_id)
+        product_id = randint(1, 1000)
+        return await self.repository.select_operation(product_id)
 
     async def insert_operation(self):
         await self.repository.insert_operation()
