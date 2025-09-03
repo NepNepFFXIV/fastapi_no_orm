@@ -56,7 +56,7 @@ def run_migrations_offline() -> None:
 
 
 def do_run_migrations(connection: Connection) -> None:
-    schema_name = settings.postgres.schema
+    schema_name = settings.postgres.db_schema
 
     connection.execute(text(f"create schema if not exists {schema_name}"))
     connection.execute(text(f"set search_path to {schema_name}"))

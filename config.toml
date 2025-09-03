@@ -4,4 +4,4 @@ port = 6969
 user = "postgres"
 password = "postgres"
 db_name = "postgres"
-schema = "no_orm"
+db_schema = "no_orm"

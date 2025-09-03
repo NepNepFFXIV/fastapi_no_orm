@@ -1,3 +1,5 @@
+from typing import Self
+
 from pydantic import BaseModel
 
 from src.fastapi_no_orm.api.models import Operation
@@ -12,5 +14,5 @@ class OperationResponse(BaseModel):
     description: str
 
     @classmethod
-    def from_Operation(cls, operation: Operation):
+    def from_Operation(cls, operation: Operation) -> Self:
         return cls(operation_id=operation.id, description=operation.description)
