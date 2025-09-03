@@ -1,4 +1,4 @@
-from typing import Self
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -13,6 +13,9 @@ class OperationResponse(BaseModel):
     operation_id: int
     description: str
 
-    @classmethod
-    def from_Operation(cls, operation: Operation) -> Self:
-        return cls(operation_id=operation.id, description=operation.description)
+    @staticmethod
+    def from_Operation(operation: Operation) -> dict[str, Any]:
+        return {
+            "operation_id": operation.id,
+            "description": operation.description,
+        }
