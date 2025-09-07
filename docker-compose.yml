@@ -17,8 +17,10 @@ services:
     ports:
       - 127.0.0.1:6969:5432
 
-  redis:
-    container_name: redis
-    image: redis:latest
+  app:
+    build: .
+    container_name: fastapi-no-orm-app
     ports:
-      - 127.0.0.1:42069:6379
+      - 127.0.0.1:8000:8000
+    depends_on:
+      - postgres
