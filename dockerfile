@@ -23,6 +23,9 @@ FROM python:3.13-slim-bookworm
 WORKDIR /app
 
 COPY --from=builder /app /app
+COPY ./config.toml /app/config.toml
+
+RUN sed -i 's/127.0.0.1/host.docker.internal/g' /app/config.toml
 
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONPATH="/app"
