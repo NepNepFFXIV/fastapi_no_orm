@@ -1,15 +1,16 @@
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
+from src.fastapi_no_orm.api.dependency import get_service
 from src.fastapi_no_orm.api.schemas import NewOperationRequest, OperationResponse
-from src.fastapi_no_orm.api.service import service
+from src.fastapi_no_orm.api.service import Service
 
 router = APIRouter()
 
 
 @router.get("/", response_model=OperationResponse)
-async def select_operation() -> Any:
+async def select_operation(service: Service = Depends(get_service)) -> Any:
     operation = await service.select_operation()
     if operation:
         return OperationResponse.from_Operation(operation)
@@ -20,5 +21,8 @@ async def select_operation() -> Any:
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def insert_operation(request_body: NewOperationRequest) -> Any:
+async def insert_operation(
+    request_body: NewOperationRequest,
+    service: Service = Depends(get_service),
+) -> Any:
     await service.insert_operation(request_body.description)

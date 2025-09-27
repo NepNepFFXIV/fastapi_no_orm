@@ -2,7 +2,6 @@ from random import randint
 
 from src.fastapi_no_orm.api.models import Operation
 from src.fastapi_no_orm.api.repository import Repository
-from src.fastapi_no_orm.database import postgres
 
 
 class Service:
@@ -15,7 +14,3 @@ class Service:
 
     async def insert_operation(self, description: str) -> None:
         await self.repository.insert_operation(description)
-
-
-repository = Repository(postgres)
-service = Service(repository)
