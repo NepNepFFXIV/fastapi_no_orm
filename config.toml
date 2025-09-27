@@ -5,3 +5,5 @@ user = "postgres"
 password = "postgres"
 db_name = "postgres"
 db_schema = "no_orm"
+min_connections = 10
+max_connections = 20

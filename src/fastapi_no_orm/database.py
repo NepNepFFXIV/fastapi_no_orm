@@ -13,11 +13,21 @@ class Postgres:
     def __init__(self) -> None:
         self._pool: asyncpg.Pool | None = None
 
-    async def connect(self, database_url: str) -> None:
+    async def connect(
+        self,
+        database_url: str,
+        min_connections: int,
+        max_connections: int,
+    ) -> None:
         if self._pool is not None:
             raise RuntimeError(DB_NOT_CONNECTED_MSG)
 
-        self._pool = await asyncpg.create_pool(database_url)
+        self._pool = await asyncpg.create_pool(
+            database_url,
+            min_size=min_connections,
+            max_size=max_connections,
+            command_timeout=60,
+        )
 
     async def close(self) -> None:
         if self._pool is None:

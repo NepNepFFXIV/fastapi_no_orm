@@ -15,6 +15,8 @@ class PostgresConfig(BaseModel):
     password: str
     db_name: str
     db_schema: str
+    min_connections: int = 10
+    max_connections: int = 20
 
     @computed_field  # type: ignore[prop-decorator]
     @property
