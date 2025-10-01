@@ -10,7 +10,11 @@ from src.fastapi_no_orm.settings import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
-    await postgres.connect(settings.postgres.postgres_url)
+    await postgres.connect(
+        settings.postgres.postgres_url,
+        settings.postgres.min_connections,
+        settings.postgres.max_connections,
+    )
     yield
     await postgres.close()
 
